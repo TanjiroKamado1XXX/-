@@ -22,7 +22,9 @@ const appConfig = {
     ...botConfig,
     token: process.env.DISCORD_TOKEN || process.env.TOKEN,
     clientId: process.env.CLIENT_ID,
-    guildId: null ,
+    // Multi-guild mode: if MULTI_GUILD=true, guildId is null (global commands)
+    // Otherwise use GUILD_ID for single-server mode
+    guildId: process.env.MULTI_GUILD === 'true' ? null : (process.env.GUILD_ID || null),
     multiGuild: process.env.MULTI_GUILD === 'true',
 
     shop: {
@@ -92,7 +94,7 @@ const appConfig = {
     voice: true,                    
     search: true,                   
     tools: true,                    
-    utility: true,                  
+    utility: true,                   
     community: true,                
     fun: true,                      
 
